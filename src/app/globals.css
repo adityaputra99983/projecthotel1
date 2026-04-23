@@ -5,6 +5,40 @@
   --foreground: #1a2e1a;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { background: var(--background); color: var(--foreground); font-family: system-ui, sans-serif; }
+* { 
+  box-sizing: border-box; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body { 
+  background: var(--background); 
+  color: var(--foreground); 
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #22c55e;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c55e;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #16a34a;
+}

@@ -305,44 +305,92 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl text-green-900 font-bold mb-4">Siap Merasakan Keajaibannya?</h2>
-          <p className="text-gray-600 mb-8">Pesan sekarang dan rasakan pengalaman menginap yang tak terlupakan.</p>
+      <section className="py-24 px-6 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-green-50 via-emerald-50 to-green-50"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full">
+          <div className="absolute top-1/2 left-10 w-32 h-32 bg-green-200 rounded-full blur-2xl opacity-50"></div>
+          <div className="absolute top-1/3 right-10 w-40 h-40 bg-emerald-200 rounded-full blur-2xl opacity-50"></div>
+        </div>
+        <div className="max-w-3xl mx-auto text-center relative">
+          <h2 className="text-4xl md:text-5xl text-green-900 font-bold mb-6">Siap Merasakan <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Keajaibannya?</span></h2>
+          <p className="text-gray-600 text-lg mb-10 max-w-xl mx-auto">Pesan sekarang dan rasakan pengalaman menginap yang tak terlupakan di tengah keindahan hutan Jawa.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-green-700 text-white px-8 py-3 rounded-full font-medium hover:bg-green-800 transition">Pesan Sekarang</button>
-            <button className="border border-green-700 text-green-700 px-8 py-3 rounded-full font-medium hover:bg-green-700 hover:text-white transition" onClick={() => openWA("Halo Hutan Lembah, saya ingin bertanya tentang hotel")}>Hubungi Kami</button>
+            <button className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-10 py-4 rounded-full font-semibold hover:shadow-2xl hover:shadow-green-500/30 hover:scale-105 transition-all duration-300">
+              Pesan Sekarang
+            </button>
+            <button className="border-2 border-green-600 text-green-700 px-10 py-4 rounded-full font-semibold hover:bg-green-600 hover:text-white transition-all duration-300" onClick={() => openWA("Halo Hutan Lembah, saya ingin bertanya tentang hotel")}>
+              Hubungi Kami
+            </button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-10 px-6 bg-green-950 text-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center"><span className="text-white font-bold text-xs">HL</span></div>
-                <span className="font-bold">HutanLembah</span>
+      <footer className="py-16 px-6 bg-gradient-to-br from-green-950 via-green-900 to-emerald-950 text-white relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        </div>
+        <div className="max-w-6xl mx-auto relative">
+          <div className="grid md:grid-cols-4 gap-10">
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30">
+                  <span className="text-white font-bold">HL</span>
+                </div>
+                <span className="text-xl font-bold">HutanLembah</span>
               </div>
-              <p className="text-green-300 text-sm">Hotel butik di tengah hutan hujan Jawa.</p>
+              <p className="text-green-300 text-sm leading-relaxed">Hotel butik di tengah hutan hujan Jawa. Nikmati ketenangan dan keindahan alam.</p>
             </div>
-            <div><h4 className="font-semibold mb-3 text-green-400 text-sm">Menu</h4><ul className="space-y-2 text-green-300 text-sm"><li>Kamar</li><li>Fasilitas</li><li>Pengalaman</li></ul></div>
-            <div><h4 className="font-semibold mb-3 text-green-400 text-sm">Kontak</h4><ul className="space-y-2 text-green-300 text-sm"><li>Malang, Jawa Timur</li><li>+62 812 3456 7890</li></ul></div>
-            <div><h4 className="font-semibold mb-3 text-green-400 text-sm">Sosial</h4><div className="flex gap-2">{['X', 'IG', 'FB'].map((s, i) => <div key={i} className="w-8 h-8 bg-green-800 rounded-full flex items-center justify-center text-xs">{s}</div>)}</div></div>
+            <div>
+              <h4 className="font-bold mb-4 text-green-400 text-sm uppercase tracking-wider">Menu</h4>
+              <ul className="space-y-3 text-green-300 text-sm">
+                <li className="hover:text-white cursor-pointer transition">Kamar</li>
+                <li className="hover:text-white cursor-pointer transition">Fasilitas</li>
+                <li className="hover:text-white cursor-pointer transition">Pengalaman</li>
+                <li className="hover:text-white cursor-pointer transition">Tentang Kami</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4 text-green-400 text-sm uppercase tracking-wider">Kontak</h4>
+              <ul className="space-y-3 text-green-300 text-sm">
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  Malang, Jawa Timur
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  +62 812 3456 7890
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  hello@hutanlembah.com
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4 text-green-400 text-sm uppercase tracking-wider">Sosial</h4>
+              <div className="flex gap-3">
+                {['𝕏', '📷', '📘'].map((s, i) => (
+                  <div key={i} className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-sm cursor-pointer transition hover:scale-110">{s}</div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="border-t border-green-900 mt-8 pt-6 text-center text-green-400 text-sm">© 2024 Hutan Lembah. All rights reserved.</div>
+          <div className="border-t border-green-800 mt-12 pt-8 text-center">
+            <p className="text-green-400 text-sm">© 2024 Hutan Lembah. All rights reserved.</p>
+          </div>
         </div>
       </footer>
 
       {/* Floating WhatsApp Button */}
       <button 
         onClick={() => openWA("Halo Hutan Lembah, saya ingin bertanya")}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg flex items-center justify-center transition hover:scale-110 z-50"
+        className="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 rounded-full shadow-2xl shadow-green-500/40 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-12 z-50"
       >
-        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none">
-          <path fill="#25D366" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
-          <path fill="#fff" d="M16.85 14.27c-.19-.29-.58-.39-.87-.39-.14-.01-.28-.02-.42-.02-.52 0-1.01.13-1.44.36-.28.15-.63.21-.96.12l-.42-.11c-.33-.09-.78-.27-1.22.12-.44.39-.85.77-1.08.95-.23.18-.41.26-.58.26-.18 0-.38-.08-.58-.28l-.31-.32c-.21-.21-.42-.38-.64-.38-.21 0-.43.14-.65.27l-.65.65c-.21.21-.42.43-.37.75.1.74.52 1.59 1.14 2.21 1.26 1.26 2.73 1.89 4.31 1.89.74 0 1.32-.1 1.68-.22.36-.12.65-.25.76-.5.1-.25.12-.53.12-.76v-.09c0-.63-.36-1.16-.65-1.52z"/>
+        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+          <path fill="#fff" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+          <path fill="#25D366" d="M16.85 14.27c-.19-.29-.58-.39-.87-.39-.14-.01-.28-.02-.42-.02-.52 0-1.01.13-1.44.36-.28.15-.63.21-.96.12l-.42-.11c-.33-.09-.78-.27-1.22.12-.44.39-.85.77-1.08.95-.23.18-.41.26-.58.26-.18 0-.38-.08-.58-.28l-.31-.32c-.21-.21-.42-.38-.64-.38-.21 0-.43.14-.65.27l-.65.65c-.21.21-.42.43-.37.75.1.74.52 1.59 1.14 2.21 1.26 1.26 2.73 1.89 4.31 1.89.74 0 1.32-.1 1.68-.22.36-.12.65-.25.76-.5.1-.25.12-.53.12-.76v-.09c0-.63-.36-1.16-.65-1.52z"/>
           <path fill="#fff" d="M10.24 8.99c.19-.06.38-.1.58-.1.2 0 .4.04.6.13.2.09.45.22.72.48.27.26.49.62.49 1.03 0 .4-.2.71-.65 1.03-.45.32-.91.63-1.18.77-.27.14-.51.24-.71.36l-.36.2c-.14.1-.32.19-.51.19-.19 0-.42-.1-.6-.32l-.36-.44c-.24-.3-.48-.62-.66-.62-.18 0-.42.16-.68.35-.26.19-.48.38-.57.38-.09 0-.2-.04-.3-.04l-.64.04c-.21.01-.65.07-1.23.56-.58.49-1.04 1.49-1.04 2.5 0 1.01.85 2.25 1.9 2.96.52.36 1.05.63 1.48.63.43 0 .8-.1 1.03-.27.23-.17.4-.4.54-.63l.21-.36c.09-.15.22-.37.05-.61l-.26-.69z"/>
         </svg>
       </button>
