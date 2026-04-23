@@ -1,39 +1,64 @@
 'use client';
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const waNumber = "6281234567890";
+  const [scrolled, setScrolled] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<Record<string, boolean>>({});
+  
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisibleSections(prev => ({ ...prev, [entry.target.id]: true }));
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+    
+    return () => { window.removeEventListener('scroll', handleScroll); observer.disconnect(); };
+  }, []);
   
   const openWA = (message: string) => {
     window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
+  const fadeIn = (section: string) => visibleSections[section] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8';
+  const transition = "transition-all duration-700 ease-out";
+
   return (
     <div className="min-h-screen bg-[#f4f7f2]">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+      <nav className={`fixed top-0 left-0 right-0 z-50 ${scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'} ${transition}`}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-green-500 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-600 via-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30">
               <span className="text-white font-bold text-sm">HL</span>
             </div>
-            <span className="text-xl font-bold text-green-800">HutanLembah</span>
+            <span className="text-xl font-bold text-green-800 tracking-tight">HutanLembah</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#about" className="text-green-800 hover:text-green-600 text-sm font-medium">Tentang</a>
-            <a href="#rooms" className="text-green-800 hover:text-green-600 text-sm font-medium">Kamar</a>
-            <a href="#amenities" className="text-green-800 hover:text-green-600 text-sm font-medium">Fasilitas</a>
-            <a href="#experience" className="text-green-800 hover:text-green-600 text-sm font-medium">Pengalaman</a>
+            {['Tentang', 'Kamar', 'Fasilitas', 'Pengalaman'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="relative text-green-800 hover:text-green-600 text-sm font-medium group">
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-500 group-hover:w-full transition-all duration-300"></span>
+              </a>
+            ))}
           </div>
-          <button className="bg-green-700 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-green-800 transition" onClick={() => openWA("Halo Hutan Lembah, saya ingin booking hotel")}>
+          <button className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:shadow-xl hover:shadow-green-500/30 hover:scale-105 transition-all duration-300" onClick={() => openWA("Halo Hutan Lembah, saya ingin booking hotel")}>
             Pesan
           </button>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="h-screen flex items-center justify-center text-white relative">
+      <section className="h-screen flex items-center justify-center text-white relative overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80"
           alt="Forest"
@@ -41,15 +66,28 @@ export default function Home() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-green-900/60"></div>
-        <div className="relative z-10 text-center px-4 max-w-3xl">
-          <p className="text-sm tracking-[0.3em] uppercase mb-4 text-green-200">Hotel & Spa Resort</p>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">Hutan Lembah</h1>
-          <p className="text-lg md:text-xl mb-8 text-green-100">Hotel butik di tengah hutan hujan Jawa — dimana ketenangan menemukanmu</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-green-800 px-8 py-3 rounded-full font-medium hover:bg-green-50 transition">Lihat Kamar</button>
-            <button className="border border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white hover:text-green-800 transition">Video Tour</button>
+        <div className="absolute inset-0 bg-gradient-to-b from-green-900/70 via-green-900/50 to-[#f4f7f2]"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30"></div>
+        <div className="relative z-10 text-center px-4 max-w-4xl">
+          <div className="inline-block mb-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+            <p className="text-sm tracking-[0.3em] uppercase text-green-200">Hotel & Spa Resort</p>
           </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-green-100 to-green-200 bg-clip-text text-transparent">Hutan Lembah</span>
+          </h1>
+          <p className="text-lg md:text-xl mb-10 text-green-100/90 max-w-2xl mx-auto leading-relaxed">Hotel butik di tengah hutan hujan Jawa — dimana ketenangan menemukanmu</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-green-800 px-10 py-4 rounded-full font-semibold hover:shadow-2xl hover:shadow-white/30 hover:scale-105 transition-all duration-300">Lihat Kamar</button>
+            <button className="border-2 border-white/60 text-white px-10 py-4 rounded-full font-semibold hover:bg-white hover:text-green-800 hover:border-white transition-all duration-300 backdrop-blur-sm">
+              <span className="flex items-center gap-2">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+                Video Tour
+              </span>
+            </button>
+          </div>
+        </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
         </div>
       </section>
 
