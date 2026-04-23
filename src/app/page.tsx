@@ -92,68 +92,97 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section id="about" className="py-20 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[300px] md:h-[350px]">
+      <section id="about" className="py-24 px-6 bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-green-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative h-[350px] md:h-[450px] group">
+              <div className="absolute -inset-4 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl opacity-20 group-hover:opacity-30 transition duration-500"></div>
               <Image
                 src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80"
                 alt="Room"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover rounded-xl"
+                className="object-cover rounded-2xl shadow-2xl"
               />
-              <div className="absolute -bottom-4 -right-4 bg-green-600 text-white rounded-lg p-3">
-                <p className="text-2xl font-bold">4.9</p>
-                <p className="text-xs">Rating</p>
+              <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-green-600 to-emerald-600 text-white rounded-xl p-4 shadow-xl">
+                <p className="text-3xl font-bold">4.9</p>
+                <p className="text-xs opacity-80">Rating Tamu</p>
               </div>
             </div>
-            <div className="space-y-4">
-              <p className="text-green-600 text-sm font-medium tracking-wider uppercase">Tentang Kami</p>
-              <h2 className="text-3xl md:text-4xl text-green-900 font-bold">Menginapur di<br/><span className="text-green-600">Pelukan Alam</span></h2>
-              <p className="text-gray-600 leading-relaxed">Hutan Lembah adalah hotel butik di jantung hutan hujan Jawa. Setiap kamar dirancang dengan material alami dari kayu lokal, menawarkan kenyamanan modern tanpa meninggalkan sentuhan alam.</p>
-              <div className="flex gap-8 pt-2">
-                <div><p className="text-3xl text-green-800 font-bold">15</p><p className="text-gray-500 text-sm">Kamar</p></div>
-                <div><p className="text-3xl text-green-800 font-bold">98%</p><p className="text-gray-500 text-sm">Tamu Puas</p></div>
-                <div><p className="text-3xl text-green-800 font-bold">5★</p><p className="text-gray-500 text-sm">Pelayanan</p></div>
+            <div className="space-y-6">
+              <div className="inline-block px-4 py-1.5 bg-green-100 rounded-full">
+                <p className="text-green-700 text-sm font-semibold tracking-wider uppercase">Tentang Kami</p>
               </div>
+              <h2 className="text-4xl md:text-5xl text-green-900 font-bold leading-tight">Menginapur di<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Pelukan Alam</span></h2>
+              <p className="text-gray-600 leading-relaxed text-lg">Hutan Lembah adalah hotel butik di jantung hutan hujan Jawa. Setiap kamar dirancang dengan material alami dari kayu lokal, menawarkan kenyamanan modern tanpa meninggalkan sentuhan alam.</p>
+              <div className="flex gap-10 pt-4">
+                {[
+                  { num: "15", label: "Kamar" },
+                  { num: "98%", label: "Tamu Puas" },
+                  { num: "5★", label: "Pelayanan" }
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <p className="text-4xl text-green-800 font-bold bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">{stat.num}</p>
+                    <p className="text-gray-500 text-sm font-medium">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+              <button className="mt-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-xl hover:shadow-green-500/30 hover:scale-105 transition-all duration-300">
+                Pelajari Lebih Lanjut
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Rooms */}
-      <section id="rooms" className="py-20 px-6 bg-green-50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-green-600 text-sm font-medium tracking-wider uppercase mb-2">Kamar</p>
-            <h2 className="text-3xl md:text-4xl text-green-900 font-bold">Pilih Kamar Favorit</h2>
+      <section id="rooms" className="py-24 px-6 bg-gradient-to-b from-green-50 to-white relative">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA2MCAwIEwgMCAwIDAgNjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50"></div>
+        <div className="max-w-6xl mx-auto relative">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1.5 bg-green-100 rounded-full mb-4">
+              <p className="text-green-700 text-sm font-semibold tracking-wider uppercase">Kamar</p>
+            </div>
+            <h2 className="text-4xl md:text-5xl text-green-900 font-bold">Pilih Kamar <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Favorit</span></h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: "Forest Suite", price: "1.500.000", size: "45m²", bed: "1 King", popular: true },
-              { name: "Valley Deluxe", price: "1.200.000", size: "35m²", bed: "1 Queen", popular: false },
-              { name: "Canopy Lodge", price: "2.000.000", size: "55m²", bed: "2 Double", popular: false },
+              { name: "Forest Suite", price: "1.500.000", size: "45m²", bed: "1 King", popular: true, img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" },
+              { name: "Valley Deluxe", price: "1.200.000", size: "35m²", bed: "1 Queen", popular: false, img: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" },
+              { name: "Canopy Lodge", price: "2.000.000", size: "55m²", bed: "2 Double", popular: false, img: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" },
             ].map((room, i) => (
-              <div key={i} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
-                <div className="relative h-44">
+              <div key={i} className={`group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${room.popular ? 'ring-2 ring-green-500 ring-offset-2' : ''}`}>
+                <div className="relative h-56">
                   <Image
-                    src={i === 0 ? "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" : i === 1 ? "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" : "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80"}
+                    src={room.img}
                     alt={room.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  {room.popular && <div className="absolute top-3 right-3 bg-green-600 text-white text-xs px-2 py-1 rounded-full">Terlaris</div>}
-                  <div className="absolute bottom-3 left-3"><p className="text-white/80 text-xs">Mulai</p><p className="text-white font-bold">Rp {room.price}</p></div>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg text-green-900 font-semibold">{room.name}</h3>
-                  <p className="text-gray-500 text-sm mb-3">{room.bed} • {room.size}</p>
-                  <div className="flex gap-4 text-xs text-gray-500 mb-4">
-                    <span>2 Tamu</span><span>Balkon</span>
+                  {room.popular && (
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+                      ⭐ Terlaris
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <p className="text-white/70 text-xs">Mulai dari</p>
+                    <p className="text-white font-bold text-xl">Rp {room.price}</p>
                   </div>
-                  <button className="w-full bg-green-700 text-white py-2 rounded-lg text-sm font-medium hover:bg-green-800 transition" onClick={() => openWA(`Halo Hutan Lembah, saya ingin booking ${room.name}`)}>Pesan</button>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl text-green-900 font-bold mb-2">{room.name}</h3>
+                  <p className="text-gray-500 text-sm mb-4">{room.bed} • {room.size}</p>
+                  <div className="flex gap-4 text-xs text-gray-500 mb-5">
+                    <span className="flex items-center gap-1"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>2 Tamu</span>
+                    <span className="flex items-center gap-1"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Balkon</span>
+                  </div>
+                  <button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:shadow-xl hover:shadow-green-500/30 hover:scale-[1.02] transition-all duration-300" onClick={() => openWA(`Halo Hutan Lembah, saya ingin booking ${room.name}`)}>
+                    Pesan Sekarang
+                  </button>
                 </div>
               </div>
             ))}
@@ -162,24 +191,30 @@ export default function Home() {
       </section>
 
       {/* Amenities */}
-      <section id="amenities" className="py-20 px-6 bg-green-900 text-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-green-400 text-sm font-medium tracking-wider uppercase mb-2">Fasilitas</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Kemewahan di Tengah Hutan</h2>
+      <section id="amenities" className="py-24 px-6 bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-green-500/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"></div>
+        </div>
+        <div className="max-w-6xl mx-auto relative">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1.5 bg-white/10 rounded-full mb-4 backdrop-blur-sm">
+              <p className="text-green-300 text-sm font-semibold tracking-wider uppercase">Fasilitas</p>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold">Kemewahan di Tengah <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-300">Hutan</span></h2>
           </div>
-          <div className="grid md:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-4 gap-6">
             {[
-              { name: "Spa Wellness", desc: "Pijat tradisional" },
-              { name: "Kolam Panas", desc: "Jacuzzi view hutan" },
-              { name: "Restoran", desc: "Makanan organik" },
-              { name: "Hiking", desc: "Jalur hutan" },
+              { name: "Spa Wellness", desc: "Pijat tradisional", icon: "M12 6c-2 0-3 1-3 3 0 1.5 1 2.5 2 3.5S12 14 12 16s1.5 2 3 2 3-1 3-3c0-1.5-1-2.5-2-3.5S14 10 14 8s-1.5-2-3-2z" },
+              { name: "Kolam Panas", desc: "Jacuzzi view hutan", icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" },
+              { name: "Restoran", desc: "Makanan organik", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
+              { name: "Hiking", desc: "Jalur hutan", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
             ].map((item, i) => (
-              <div key={i} className="bg-white/10 rounded-xl p-5 text-center hover:bg-white/20 transition">
-                <div className="w-12 h-12 bg-green-600 rounded-lg mx-auto mb-3 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              <div key={i} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/15 hover:scale-105 hover:-translate-y-2 transition-all duration-300 border border-white/10 hover:border-white/30">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg shadow-green-500/30 group-hover:shadow-green-500/50 transition">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} /></svg>
                 </div>
-                <h3 className="font-semibold mb-1">{item.name}</h3>
+                <h3 className="font-bold text-lg mb-2">{item.name}</h3>
                 <p className="text-green-300 text-sm">{item.desc}</p>
               </div>
             ))}
@@ -188,27 +223,42 @@ export default function Home() {
       </section>
 
       {/* Experience */}
-      <section id="experience" className="py-20 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[300px] md:h-[350px] order-2">
+      <section id="experience" className="py-24 px-6 bg-white relative overflow-hidden">
+        <div className="absolute top-1/2 left-0 w-72 h-72 bg-green-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 -translate-x-1/2"></div>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative h-[350px] md:h-[450px] group order-2">
+              <div className="absolute -inset-4 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl opacity-20 group-hover:opacity-30 transition duration-500"></div>
               <Image
                 src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80"
                 alt="Nature"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover rounded-xl"
+                className="object-cover rounded-2xl shadow-2xl"
               />
+              <div className="absolute -top-6 -left-6 bg-white rounded-xl p-4 shadow-xl">
+                <p className="text-3xl font-bold text-green-600">⭐ 4.9</p>
+                <p className="text-xs text-gray-500">Rating</p>
+              </div>
             </div>
-            <div className="space-y-4 order-1">
-              <p className="text-green-600 text-sm font-medium tracking-wider uppercase">Pengalaman</p>
-              <h2 className="text-3xl md:text-4xl text-green-900 font-bold">Rasakan<br/><span className="text-green-600">Keajaiban Alam</span></h2>
-              <p className="text-gray-600">Setiap aktivitas dirancang untuk membantumu terhubung dengan alam.</p>
-              <div className="space-y-2">
-                {["Sunrise Walk", "Forest Yoga", "Campfire Night", "Cooking Class"].map((exp, i) => (
-                  <div key={i} className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                    <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center"><svg className="w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg></div>
-                    <span className="text-green-900 font-medium text-sm">{exp}</span>
+            <div className="space-y-6 order-1">
+              <div className="inline-block px-4 py-1.5 bg-green-100 rounded-full">
+                <p className="text-green-700 text-sm font-semibold tracking-wider uppercase">Pengalaman</p>
+              </div>
+              <h2 className="text-4xl md:text-5xl text-green-900 font-bold leading-tight">Rasakan<br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Keajaiban Alam</span></h2>
+              <p className="text-gray-600 text-lg leading-relaxed">Setiap aktivitas dirancang untuk membantumu terhubung dengan alam.</p>
+              <div className="space-y-3">
+                {[
+                  { name: "Sunrise Walk", icon: "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" },
+                  { name: "Forest Yoga", icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" },
+                  { name: "Campfire Night", icon: "M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" },
+                  { name: "Cooking Class", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" }
+                ].map((exp, i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl hover:from-green-100 hover:to-emerald-100 transition duration-300 group">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                      <svg className="w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={exp.icon} /></svg>
+                    </div>
+                    <span className="text-green-900 font-semibold">{exp.name}</span>
                   </div>
                 ))}
               </div>
@@ -218,24 +268,35 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-6 bg-green-50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-green-600 text-sm font-medium tracking-wider uppercase mb-2">Testimoni</p>
-            <h2 className="text-3xl md:text-4xl text-green-900 font-bold">Apa Kata Tamu</h2>
+      <section className="py-24 px-6 bg-gradient-to-b from-white via-green-50 to-white relative">
+        <div className="absolute top-10 right-10 w-64 h-64 bg-green-100 rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute bottom-10 left-10 w-48 h-48 bg-emerald-100 rounded-full blur-3xl opacity-50"></div>
+        <div className="max-w-6xl mx-auto relative">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1.5 bg-green-100 rounded-full mb-4">
+              <p className="text-green-700 text-sm font-semibold tracking-wider uppercase">Testimoni</p>
+            </div>
+            <h2 className="text-4xl md:text-5xl text-green-900 font-bold">Apa Kata <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-500">Tamu</span></h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: "Sarah", city: "Jakarta", text: "Suara burung di pagi hari, udara segar — semuanya sempurna!" },
-              { name: "Budi", city: "Bandung", text: "Tempat perfect untuk melarikan diri dari kota!" },
-              { name: "Wati", city: "Surabaya", text: "Liburan keluarga terbaik! Sangat menikmati." },
+              { name: "Sarah", city: "Jakarta", text: "Suara burung di pagi hari, udara segar — semuanya sempurna!", rating: 5 },
+              { name: "Budi", city: "Bandung", text: "Tempat perfect untuk melarikan diri dari kota!", rating: 5 },
+              { name: "Wati", city: "Surabaya", text: "Liburan keluarga terbaik! Sangat menikmati.", rating: 5 },
             ].map((t, i) => (
-              <div key={i} className="bg-white p-6 rounded-xl shadow-sm">
-                <div className="flex gap-1 mb-3">{[...Array(5)].map((_, j) => <svg key={j} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
-                <p className="text-gray-600 text-sm mb-4">"{t.text}"</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold">{t.name[0]}</div>
-                  <div><p className="text-green-900 text-sm font-medium">{t.name}</p><p className="text-gray-500 text-xs">{t.city}</p></div>
+              <div key={i} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-green-100">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <svg key={j} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">"{t.text}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">{t.name[0]}</div>
+                  <div>
+                    <p className="text-green-900 font-bold">{t.name}</p>
+                    <p className="text-gray-500 text-sm">{t.city}</p>
+                  </div>
                 </div>
               </div>
             ))}
