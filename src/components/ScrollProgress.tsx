@@ -6,14 +6,19 @@ export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    let mounted = true;
     const onScroll = () => {
+      if (!mounted) return;
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setProgress(Math.min(pct, 100));
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      mounted = false;
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (

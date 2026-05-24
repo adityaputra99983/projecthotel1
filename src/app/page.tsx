@@ -8,7 +8,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import BookingModal from "@/components/BookingModal";
 import TiltCard from "@/components/TiltCard";
 import SectionReveal from "@/components/SectionReveal";
-import VideoBackground from "@/components/VideoBackground";
+import AnimatedBg from "@/components/AnimatedBg";
 
 export default function Home() {
   const waNumber = "6281234567890";
@@ -20,21 +20,26 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    let mounted = true;
+
+    const handleScroll = () => {
+      if (mounted) setScrolled(window.scrollY > 80);
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const onMouse = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+      if (mounted) setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
     };
     window.addEventListener('mousemove', onMouse);
 
-    setHeaderVisible(true);
+    if (mounted) setHeaderVisible(true);
 
     const testimonialTimer = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % 3);
+      if (mounted) setCurrentTestimonial(prev => (prev + 1) % 3);
     }, 4000);
 
     return () => {
+      mounted = false;
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', onMouse);
       clearInterval(testimonialTimer);
@@ -56,8 +61,7 @@ export default function Home() {
       <CursorFollower />
       <ScrollProgress />
       <LeafParticles />
-      <VideoBackground />
-      <div className="noise-overlay" />
+      <AnimatedBg />
 
       {/* Navigation */}
       <nav
@@ -103,12 +107,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="h-screen flex items-center justify-center text-white relative overflow-hidden">
-        {/* Extra overlay for text readability over video */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-[2]" />
+      <section ref={heroRef} className="h-screen flex items-center justify-center text-white relative">
 
         {/* Hero content */}
-        <div className="relative z-10 text-center px-4 max-w-5xl">
+        <div className="relative text-center px-4 max-w-5xl" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
           <SectionReveal direction="up">
             <div className="inline-flex items-center gap-2 mb-6 px-5 py-2 bg-white/5 backdrop-blur-md rounded-full border border-white/10">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />

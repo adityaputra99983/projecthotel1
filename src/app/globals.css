@@ -281,3 +281,23 @@ body {
     transparent 60%
   );
 }
+
+@keyframes skyglow {
+  0% { opacity: 0.3; transform: scale(1) translate(0, 0); }
+  50% { opacity: 0.6; transform: scale(1.1) translate(20px, -10px); }
+  100% { opacity: 0.4; transform: scale(0.95) translate(-15px, 15px); }
+}
+
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  25% { transform: translate(30px, -20px) scale(1.1); opacity: 0.6; }
+  50% { transform: translate(-20px, 10px) scale(0.9); opacity: 0.3; }
+  75% { transform: translate(15px, 25px) scale(1.05); opacity: 0.5; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+}
+
+@keyframes wave-drift {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-30px) scaleY(1.2); }
+  100% { transform: translateX(30px) scaleY(0.9); }
+}

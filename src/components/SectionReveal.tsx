@@ -19,12 +19,13 @@ export default function SectionReveal({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let mounted = true;
     const el = ref.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && mounted) {
           setVisible(true);
           observer.unobserve(el);
         }
@@ -33,7 +34,10 @@ export default function SectionReveal({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      mounted = false;
+      observer.disconnect();
+    };
   }, []);
 
   const animClass = visible
@@ -62,16 +66,23 @@ export function StaggerReveal({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let mounted = true;
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) { setVisible(true); observer.unobserve(el); }
+        if (entry.isIntersecting && mounted) {
+          setVisible(true);
+          observer.unobserve(el);
+        }
       },
       { threshold: 0.1 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      mounted = false;
+      observer.disconnect();
+    };
   }, []);
 
   return (
