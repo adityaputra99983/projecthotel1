@@ -77,7 +77,7 @@ function FireflyCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     if (!ctx) return;
 
     let animId: number;
@@ -104,37 +104,39 @@ function FireflyCanvas() {
       });
     }
 
+    const cvs = canvas;
+    const c = ctx;
     let t = 0;
     function draw() {
       t++;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      c.clearRect(0, 0, cvs.width, cvs.height);
       particles.forEach((p) => {
         p.x += p.vx + Math.sin(t * 0.01 + p.phase) * 0.15;
         p.y += p.vy + Math.cos(t * 0.008 + p.phase * 1.3) * 0.15;
-        if (p.x < -30) p.x = canvas.width + 30;
-        if (p.x > canvas.width + 30) p.x = -30;
-        if (p.y < -30) p.y = canvas.height + 30;
-        if (p.y > canvas.height + 30) p.y = -30;
+        if (p.x < -30) p.x = cvs.width + 30;
+        if (p.x > cvs.width + 30) p.x = -30;
+        if (p.y < -30) p.y = cvs.height + 30;
+        if (p.y > cvs.height + 30) p.y = -30;
 
         const twinkle = 0.15 + 0.85 * (0.5 + 0.5 * Math.sin(t * p.speed + p.phase));
         if (twinkle < 0.1) return;
-        ctx.save();
-        ctx.globalAlpha = twinkle * 0.6;
+        c.save();
+        c.globalAlpha = twinkle * 0.6;
 
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
+        const grad = c.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
         grad.addColorStop(0, `hsla(${p.hue}, 90%, 80%, 0.35)`);
         grad.addColorStop(0.5, `hsla(${p.hue}, 80%, 70%, 0.1)`);
         grad.addColorStop(1, `hsla(${p.hue}, 80%, 60%, 0)`);
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 6, 0, Math.PI * 2);
-        ctx.fill();
+        c.fillStyle = grad;
+        c.beginPath();
+        c.arc(p.x, p.y, p.size * 6, 0, Math.PI * 2);
+        c.fill();
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, 95%, 90%, 0.95)`;
-        ctx.fill();
-        ctx.restore();
+        c.beginPath();
+        c.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2);
+        c.fillStyle = `hsla(${p.hue}, 95%, 90%, 0.95)`;
+        c.fill();
+        c.restore();
       });
       animId = requestAnimationFrame(draw);
     }
